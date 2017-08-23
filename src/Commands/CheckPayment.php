@@ -52,6 +52,8 @@ class CheckPayment extends Command
     {
         // get transaction from bitcoind
         $transactions = $bitcoind->listtransactions('',50);
+        // new version of denpa/php-bitcoinrpc does not return array, so we must check
+        if(!is_array($transactions)) $transactions = $transactions->get();
         $transactions = array_reverse($transactions);
         $transactions = array_filter($transactions, function($v) { return $v['category'] == 'receive'; });
         // reindex array - only transactions which receive bitcoins
