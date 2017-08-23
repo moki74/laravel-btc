@@ -11,7 +11,7 @@
     "autoload": {
 
         "psr-4": {
-            "moki74\\BtcPayment\\": "packages/moki74/btc-payment/src"
+            "moki74\\BtcPayment\\": "src"
         }
     },
     "require": {}
