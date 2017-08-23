@@ -14,5 +14,7 @@
             "moki74\\BtcPayment\\": "src"
         }
     },
-    "require": {}
+    "require": {
+       "denpa/laravel-bitcoinrpc": "^1.1",
+    }
 }
