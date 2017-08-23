@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use moki74\BtcPayment\Events\ConfirmedPayment;
+use moki74\BtcPayment\Events\ConfirmedPaymentEvent;
 use Illuminate\Support\Facades\Log;
 
 class ConfirmedPaymentListener
@@ -23,7 +23,7 @@ class ConfirmedPaymentListener
      * @param  OrderShipped  $event
      * @return void
      */
-    public function handle(ConfirmedPayment $event)
+    public function handle(ConfirmedPaymentEvent $event)
     {
          Log::debug('Confirmed Payment listener: '. $event->confirmedPayment);
     }

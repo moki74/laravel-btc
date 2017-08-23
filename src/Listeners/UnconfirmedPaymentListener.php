@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use moki74\BtcPayment\Events\UnconfirmedPayment;
+use moki74\BtcPayment\Events\UnconfirmedPaymentEvent;
 use Illuminate\Support\Facades\Log;
 
 class UnconfirmedPaymentListener
@@ -23,7 +23,7 @@ class UnconfirmedPaymentListener
      * @param  OrderShipped  $event
      * @return void
      */
-    public function handle(UnconfirmedPayment $event)
+    public function handle(UnconfirmedPaymentEvent $event)
     {
          Log::debug('Unconfirmed Payment listener: '. $event->unconfirmedPayment);
     }

@@ -40,7 +40,6 @@ class BitcoinPaymentServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 Commands\CheckPayment::class,
-                Commands\BitcoinCLI::class,
             ]);
         }
 

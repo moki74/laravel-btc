@@ -2,12 +2,14 @@
 
 namespace moki74\BtcPayment\Commands;
 
-use Illuminate\Console\Command;
 use Denpa\Bitcoin\Client as BitcoinClient;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
+use moki74\BtcPayment\Events\ConfirmedPaymentEvent;
+use moki74\BtcPayment\Events\UnconfirmedPaymentEvent;
+use moki74\BtcPayment\Events\UnknownTransactionEvent;
 use moki74\BtcPayment\Models\Payment;
 use moki74\BtcPayment\Models\UnknownTransaction;
-use moki74\BtcPayment\BitcoinPaymentServiceProvider;
-use Illuminate\Support\Facades\Log;
 
 class CheckPayment extends Command
 {
@@ -56,7 +58,7 @@ class CheckPayment extends Command
         $transactions = array_values($transactions);
 
         // Prepayments without transaction - not paid yet
-        $prepayments_no_tx = \moki74\BtcPayment\Models\Payment::unpaid()->get();
+        $prepayments_no_tx = Payment::unpaid()->get();
         foreach ($prepayments_no_tx as $prepayment_no_tx) {
             // check if there are multiple payments to same address
             $keys = array_keys( array_column($transactions, 'address'), $prepayment_no_tx['address']);
@@ -67,7 +69,7 @@ class CheckPayment extends Command
                     $prepayment_no_tx->txid = $transactions[$key]['txid'];
                     $prepayment_no_tx->amount_received = $transactions[$key]['amount'];
                     $prepayment_no_tx->save();
-                    event(new \moki74\BtcPayment\Events\UnconfirmedPayment($prepayment_no_tx));
+                    event(new UnconfirmedPaymentEvent($prepayment_no_tx));
                     $pair_found = true;
 
                 }
@@ -75,13 +77,13 @@ class CheckPayment extends Command
             // wrong amount is paid - we dontß know for what order is that payment and this is unknown transaction
             if(!$pair_found){
                 foreach ($keys as $key) {
-                    $unknownTx = \moki74\BtcPayment\Models\UnknownTransaction::find($transactions[$key]['txid']);
+                    $unknownTx = UnknownTransaction::find($transactions[$key]['txid']);
                     if(!$unknownTx){
-                        $unknownTx = new \moki74\BtcPayment\Models\UnknownTransaction;
+                        $unknownTx = new UnknownTransaction;
                         $unknownTx->address =  $transactions[$key]['address'];
                         $unknownTx->amount_received =  $transactions[$key]['amount'];
                         $unknownTx->txid = $transactions[$key]['txid'];
-                        event(new \moki74\BtcPayment\Events\UnknownTransactionEvent($unknownTx));
+                        event(new UnknownTransactionEvent($unknownTx));
                     }
                     $unknownTx->confirmations = $transactions[$key]['confirmations'];
                     $unknownTx->save();
@@ -91,7 +93,7 @@ class CheckPayment extends Command
         }
 
         //Check for Prepayments with transaction in blockchain (these are paid), but we need number of confirmations
-        $prepayments = \moki74\BtcPayment\Models\Payment::not_confirmed()->get();
+        $prepayments = Payment::not_confirmed()->get();
         foreach ($prepayments as $prepayment) {
             $key = array_search( $prepayment->txid, array_column($transactions, 'txid'));
             if( $key !== false){
@@ -99,7 +101,7 @@ class CheckPayment extends Command
                  // if we have min confirmations, payment is confirmed
                  if ($prepayment->confirmations >= config('bitcoinpayment.min-confirmations')){
                      $prepayment->paid = 1;
-                     event(new \moki74\BtcPayment\Events\ConfirmedPayment($prepayment));
+                     event(new ConfirmedPaymentEvent($prepayment));
                  }
                  $prepayment->save();
              }

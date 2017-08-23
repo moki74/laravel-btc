@@ -6,11 +6,11 @@ use moki74\BtcPayment\Models\Payment;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class ConfirmedPayment
+class UnconfirmedPaymentEvent
 {
     use SerializesModels;
 
-    public $confirmedPayment;
+    public $unconfirmedPayment;
 
     /**
      * Create a new event instance.
@@ -18,9 +18,9 @@ class ConfirmedPayment
      * @param  Order  $order
      * @return void
      */
-    public function __construct(Payment $confirmedPayment)
+    public function __construct(Payment $unconfirmedPayment)
     {
-        $this->confirmedPayment = $confirmedPayment;
+        $this->unconfirmedPayment = $unconfirmedPayment;
         //Log::debug('Event constructor :'.$this->unconfirmedPayment);
     }
 }
