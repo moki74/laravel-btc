@@ -17,5 +17,13 @@
         "psr-4": {
             "moki74\\BtcPayment\\": "src"
         }
+    },
+
+     "extra": {
+        "laravel": {
+            "providers": [
+                "moki74\\BtcPayment\\BitcoinPaymentServiceProvider"
+            ]
+        }
     }
 }
