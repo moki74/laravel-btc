@@ -1,6 +1,6 @@
 {
     "name": "moki74/btc-payment",
-    "description": "Payment system for btc",
+    "description": "Payment system for btc with bitcoind",
     "license": "MIT",
     "authors": [
         {
@@ -9,8 +9,9 @@
         }
     ],
 
-    "require": {
-       "denpa/laravel-bitcoinrpc": "^1.1"
+   "require": {
+        "php": ">=5.6.0",
+        "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
     },
     
     "autoload": {
