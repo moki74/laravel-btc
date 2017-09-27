@@ -31,7 +31,7 @@ namespace moki74\BtcPayment;
 class Bitcoind
 {
     // Configuration options
-    private $username;
+    public $username;
     private $password;
     private $proto;
     private $host;
@@ -132,6 +132,7 @@ class Bitcoind
         if ($this->response['error']) {
             // If bitcoind returned an error, put that in $this->error
             $this->error = $this->response['error']['message'];
+
         } elseif ($this->status != 200) {
             // If bitcoind didn't return a nice error message, we need to make our own
             switch ($this->status) {

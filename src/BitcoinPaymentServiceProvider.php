@@ -17,8 +17,8 @@ class BitcoinPaymentServiceProvider extends ServiceProvider
     public function boot()
     {
         //publish config file and merge config
-        $path = realpath(__DIR__.'/../config/config.php');
-        $this->publishes([$path => config_path('bitcoind.php')], 'config');
+        $path = realpath(__DIR__.'/../config/bitcoind.php');
+        $this->publishes([$path => config_path('bitcoind.php')], 'bitcoin');
         $this->mergeConfigFrom($path, 'bitcoind');
 
         //publish listeners for payment events
@@ -42,13 +42,10 @@ class BitcoinPaymentServiceProvider extends ServiceProvider
         }
 
         $this->registerEloquentFactoriesFrom(__DIR__.'/factories');
-        $this->app->bind('Bitcoind', function ($app) {
-            $payment = new \moki74\BtcPayment\Bitcoind;
-            
-            return $payment;
-        });
+        
 
         $this->registerBitcoind();
+
 
         $this->app->bind('BtcPayment', function ($app) {
             $payment = new \moki74\BtcPayment\Models\Payment;
@@ -77,7 +74,7 @@ class BitcoinPaymentServiceProvider extends ServiceProvider
                 $app['config']->get('bitcoind.user'),
                 $app['config']->get('bitcoind.password'),
                 $app['config']->get('bitcoind.host', 'localhost'),
-                $app['config']->get('bitcoind.port', 8332)
+                $app['config']->get('bitcoind.port', 18332)
             );
         });
     }
