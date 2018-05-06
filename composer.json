@@ -1,5 +1,5 @@
 {
-    "name": "moki74/LaravelBtc",
+    "name": "moki74/laravel-btc",
     "description": "Payment system for btc with bitcoind",
     "license": "MIT",
     "authors": [
