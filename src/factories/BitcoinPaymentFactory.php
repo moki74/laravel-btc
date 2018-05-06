@@ -1,5 +1,5 @@
 <?php
-use moki74\BtcPayment\Models\Payment;
+use moki74\LaravelBtc\Models\Payment;
 use Denpa\Bitcoin\Client as BitcoinClient;
 
 /*
@@ -16,7 +16,7 @@ use Denpa\Bitcoin\Client as BitcoinClient;
 
 
 
-$factory->define(moki74\BtcPayment\Models\Payment::class, function (Faker\Generator $faker) {
+$factory->define(moki74\LaravelBtc\Models\Payment::class, function (Faker\Generator $faker) {
 
 
     return [

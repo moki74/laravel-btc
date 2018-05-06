@@ -1,16 +1,16 @@
 <?php
 
-namespace moki74\BtcPayment\Commands;
+namespace moki74\LaravelBtc\Commands;
 
 //use Denpa\Bitcoin\Client as BitcoinClient;
-use moki74\BtcPayment\Bitcoind as BitcoinClient;
+use moki74\LaravelBtc\Bitcoind as BitcoinClient;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use moki74\BtcPayment\Events\ConfirmedPaymentEvent;
-use moki74\BtcPayment\Events\UnconfirmedPaymentEvent;
-use moki74\BtcPayment\Events\UnknownTransactionEvent;
-use moki74\BtcPayment\Models\Payment;
-use moki74\BtcPayment\Models\UnknownTransaction;
+use moki74\LaravelBtc\Events\ConfirmedPaymentEvent;
+use moki74\LaravelBtc\Events\UnconfirmedPaymentEvent;
+use moki74\LaravelBtc\Events\UnknownTransactionEvent;
+use moki74\LaravelBtc\Models\Payment;
+use moki74\LaravelBtc\Models\UnknownTransaction;
 
 class CheckPayment extends Command
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace moki74\BtcPayment;
+namespace moki74\LaravelBtc;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
-use moki74\BtcPayment\Bitcoind as BitcoinClient;
+use moki74\LaravelBtc\Bitcoind as BitcoinClient;
 
 class BitcoinPaymentServiceProvider extends ServiceProvider
 {
@@ -47,8 +47,8 @@ class BitcoinPaymentServiceProvider extends ServiceProvider
         $this->registerBitcoind();
 
 
-        $this->app->bind('BtcPayment', function ($app) {
-            $payment = new \moki74\BtcPayment\Models\Payment;
+        $this->app->bind('LaravelBtc', function ($app) {
+            $payment = new \moki74\LaravelBtc\Models\Payment;
             $payment->address = resolve(BitcoinClient::class)->getnewaddress();
             return $payment;
         });
@@ -65,12 +65,12 @@ class BitcoinPaymentServiceProvider extends ServiceProvider
     }
 
     /**
-     * @return \moki74\BtcPayment\Bitcoind object
+     * @return \moki74\LaravelBtc\Bitcoind object
      */
     protected function registerBitcoind()
     {
-        $this->app->singleton('moki74\BtcPayment\Bitcoind', function ($app) {
-            return new \moki74\BtcPayment\Bitcoind(
+        $this->app->singleton('moki74\LaravelBtc\Bitcoind', function ($app) {
+            return new \moki74\LaravelBtc\Bitcoind(
                 $app['config']->get('bitcoind.user'),
                 $app['config']->get('bitcoind.password'),
                 $app['config']->get('bitcoind.host', 'localhost'),

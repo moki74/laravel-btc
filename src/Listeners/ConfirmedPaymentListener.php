@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use moki74\BtcPayment\Events\ConfirmedPaymentEvent;
+use moki74\LaravelBtc\Events\ConfirmedPaymentEvent;
 use Illuminate\Support\Facades\Log;
 
 class ConfirmedPaymentListener

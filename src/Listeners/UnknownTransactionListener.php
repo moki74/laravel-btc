@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use moki74\BtcPayment\Events\UnknownTransactionEvent;
+use moki74\LaravelBtc\Events\UnknownTransactionEvent;
 use Illuminate\Support\Facades\Log;
 
 class UnknownTransactionListener

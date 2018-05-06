@@ -1,8 +1,8 @@
 <?php
 
-namespace moki74\BtcPayment\Events;
+namespace moki74\LaravelBtc\Events;
 
-use moki74\BtcPayment\Models\UnknownTransaction;
+use moki74\LaravelBtc\Models\UnknownTransaction;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 

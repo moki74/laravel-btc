@@ -26,7 +26,7 @@ echo $bitcoind->error;
 // Example:
 echo $bitcoind->status;
 */
-namespace moki74\BtcPayment;
+namespace moki74\LaravelBtc;
 
 class Bitcoind
 {

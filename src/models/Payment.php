@@ -1,6 +1,6 @@
 <?php
 
-namespace moki74\BtcPayment\Models;
+namespace moki74\LaravelBtc\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
