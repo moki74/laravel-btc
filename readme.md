@@ -1,9 +1,16 @@
-# BTC
-TODO: Write a project description
+# laravel-btc
+Package for receive payments via BTC
 ## Installation
-TODO: Describe the installation process
+```
+composer require moki74/laravel-btc
+```
+After installation publish package with artisan command :
+```
+php artisan vendor:publish
+```
+and choose by tag **bitcoin**.
 ## Usage
-TODO: Write usage instructions
+
 ## Contributing
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`

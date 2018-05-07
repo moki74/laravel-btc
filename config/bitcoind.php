@@ -78,4 +78,16 @@ return [
     */
 
     'ca' => null,
+
+     /*
+    |--------------------------------------------------------------------------
+    | LaravelBtc  - this param is for minimum number of confirmations
+    |--------------------------------------------------------------------------
+    | This is minimal number of confirmations that we need
+    | to consider payment is safe.
+    |
+    */
+
+    'min-confirmations' => env('BITCOIND_MIN_CONFIRMATIONS', 3),
+
 ];
