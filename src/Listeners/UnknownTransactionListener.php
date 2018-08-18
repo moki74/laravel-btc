@@ -20,11 +20,11 @@ class UnknownTransactionListener
     /**
      * Handle the event.
      *
-     * @param  OrderShipped  $event
+     * @param  UnknownTransactionEvent  $event
      * @return void
      */
     public function handle(UnknownTransactionEvent $event)
     {
-         Log::debug('Unknown transaction : '. $event->unknownTx);
+        Log::debug('Unknown transaction : '. $event->unknownTx);
     }
 }

@@ -20,11 +20,11 @@ class UnconfirmedPaymentListener
     /**
      * Handle the event.
      *
-     * @param  OrderShipped  $event
+     * @param  UnconfirmedPaymentEvent  $event
      * @return void
      */
     public function handle(UnconfirmedPaymentEvent $event)
     {
-         Log::debug('Unconfirmed Payment listener: '. $event->unconfirmedPayment);
+        Log::debug('Unconfirmed Payment listener: '. $event->unconfirmedPayment);
     }
 }

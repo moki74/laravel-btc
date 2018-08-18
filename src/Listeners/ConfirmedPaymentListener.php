@@ -20,11 +20,11 @@ class ConfirmedPaymentListener
     /**
      * Handle the event.
      *
-     * @param  OrderShipped  $event
+     * @param  ConfirmedPaymentEvent  $event
      * @return void
      */
     public function handle(ConfirmedPaymentEvent $event)
     {
-         Log::debug('Confirmed Payment listener: '. $event->confirmedPayment);
+        Log::debug('Confirmed Payment listener: '. $event->confirmedPayment);
     }
 }

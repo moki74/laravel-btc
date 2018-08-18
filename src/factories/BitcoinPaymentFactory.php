@@ -1,6 +1,5 @@
 <?php
 use moki74\LaravelBtc\Models\Payment;
-use Denpa\Bitcoin\Client as BitcoinClient;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +16,12 @@ use Denpa\Bitcoin\Client as BitcoinClient;
 
 
 $factory->define(moki74\LaravelBtc\Models\Payment::class, function (Faker\Generator $faker) {
-
-
     return [
         'address' => function () {
-            return resolve(BitcoinClient::class)->getnewaddress();
+            return resolve("bitcoind")->getnewaddress();
         },
         'paid' => 0,
-        'amount' => 0,
+        'amount' => $faker->randomFloat(4, 0.0001, 1.9999),
         'confirmations' => 0,
     ];
 });

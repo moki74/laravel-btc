@@ -2,8 +2,7 @@
 
 namespace moki74\LaravelBtc\Commands;
 
-//use Denpa\Bitcoin\Client as BitcoinClient;
-use moki74\LaravelBtc\Bitcoind as BitcoinClient;
+use moki74\LaravelBtc\Bitcoind;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use moki74\LaravelBtc\Events\ConfirmedPaymentEvent;
@@ -44,8 +43,9 @@ class CheckPayment extends Command
      *
      * @return mixed
      */
-    public function handle(BitcoinClient $bitcoind)
+    public function handle(Bitcoind $bitcoind)
     {
+        // $bitcoind = resolve("LaravelBtcClient");
         $this->checkPayment($bitcoind);
     }
 
@@ -53,7 +53,6 @@ class CheckPayment extends Command
     {
         // get transaction from bitcoind
         $transactions = $bitcoind->listtransactions('', 50);
-        // new version of denpa/php-bitcoinrpc does not return array, so we must check
         if (!is_array($transactions)) {
             $transactions = $transactions->get();
         }
@@ -104,7 +103,7 @@ class CheckPayment extends Command
             if ($key !== false) {
                 $prepayment->confirmations = $transactions[$key]['confirmations'];
                 // if we have min confirmations, payment is confirmed
-                if ($prepayment->confirmations >= config('bitcoinpayment.min-confirmations')) {
+                if ($prepayment->confirmations >= config('bitcoind.min-confirmations')) {
                     $prepayment->paid = 1;
                     event(new ConfirmedPaymentEvent($prepayment));
                 }
