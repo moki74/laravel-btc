@@ -21,5 +21,6 @@ class UnknownTransactionEvent
     public function __construct(UnknownTransaction $unknownTx)
     {
         $this->unknownTx = $unknownTx;
+        //Log::debug('UnknownTransaction Event constructor :'.$this->$unknownTx);
     }
 }

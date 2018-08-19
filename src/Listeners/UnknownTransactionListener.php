@@ -25,6 +25,6 @@ class UnknownTransactionListener
      */
     public function handle(UnknownTransactionEvent $event)
     {
-        Log::debug('Unknown transaction : '. $event->unknownTx);
+        Log::debug('Unknown Transaction Listener: '. $event->unknownTx);
     }
 }

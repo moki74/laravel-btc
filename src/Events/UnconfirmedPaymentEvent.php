@@ -21,6 +21,6 @@ class UnconfirmedPaymentEvent
     public function __construct(Payment $unconfirmedPayment)
     {
         $this->unconfirmedPayment = $unconfirmedPayment;
-        //Log::debug('Event constructor :'.$this->unconfirmedPayment);
+        //Log::debug('UnconfirmedPaymentEvent constructor :'.$this->unconfirmedPayment);
     }
 }

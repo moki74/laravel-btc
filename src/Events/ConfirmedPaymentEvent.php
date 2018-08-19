@@ -13,7 +13,7 @@ class ConfirmedPaymentEvent
     public $confirmedPayment;
 
     /**
-     * Create a new event instance.
+     * Fired when num of confirmations on block chain meet BITCOIND_MIN_CONFIRMATIONS in .env file.
      *
      * @param  Order  $order
      * @return void
@@ -21,6 +21,6 @@ class ConfirmedPaymentEvent
     public function __construct(Payment $confirmedPayment)
     {
         $this->confirmedPayment = $confirmedPayment;
-        //Log::debug('Event constructor :'.$this->unconfirmedPayment);
+        //Log::debug('ConfirmedPaymentEvent constructor :'.$this->confirmedPayment);
     }
 }
