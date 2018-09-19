@@ -89,5 +89,9 @@ return [
     */
 
     'min-confirmations' => env('BITCOIND_MIN_CONFIRMATIONS', 3),
+    
+    'order-model' => env('BITCOIND_ORDER_MODEL', 'App\Order'),
+    
+    'user-model' => env('BITCOIND_USER_MODEL', 'App\User'),
 
 ];
