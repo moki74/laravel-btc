@@ -8,12 +8,12 @@ class Payment extends Model
 {
    public function order()
    {
-       return $this->belongsTo('App\Order');
+       return $this->belongsTo(config('bitcoind.order-model'));
    }
 
    public function user()
    {
-       return $this->belongsTo('App\User');
+       return $this->belongsTo(config('bitcoind.user-model'));
    }
 
    public function scopeUnpaid($query)
