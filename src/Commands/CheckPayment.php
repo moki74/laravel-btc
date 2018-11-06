@@ -52,7 +52,7 @@ class CheckPayment extends Command
     private function checkPayment($bitcoind)
     {
         // get transaction from bitcoind
-        $transactions = $bitcoind->listtransactions('', 50);
+        $transactions = $bitcoind->listtransactions('*', 50);
         if (!is_array($transactions)) {
             $transactions = $transactions->get();
         }
